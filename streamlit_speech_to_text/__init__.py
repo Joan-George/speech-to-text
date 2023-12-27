@@ -1,5 +1,6 @@
 import os
 import streamlit.components.v1 as components
+import streamlit as st
 
 from typing import Tuple
 
@@ -8,7 +9,7 @@ from typing import Tuple
 # the component, and True when we're ready to package and distribute it.
 # (This is, of course, optional - there are innumerable ways to manage your
 # release process.)
-_RELEASE = True
+_RELEASE = False
 
 # Declare a Streamlit component. `declare_component` returns a function
 # that is used to create instances of the component. We're naming this
@@ -38,6 +39,21 @@ else:
 
 
 # Edit arguments sent and result received from React component, so the initial input is converted to an array and returned value extracted from the component
-def speech_to_text():
+def speech_to_text(key, callback = None, kwargs={}):
     component_value = _component_func()
-    return component_value
+    # print("after_component_func", component_value , type(component_value))
+    if component_value is None:
+        return ''
+    if isinstance(component_value,dict) :
+        if component_value["stopped"]:
+            if(component_value['transcript'] == ''):
+                return ''
+            else:
+                st.session_state[f"{key}_output"] = component_value["transcript"]
+                if callback:
+                    callback(**kwargs)
+                    return component_value["transcript"]
+                else:
+                    return component_value["transcript"]
+    else:
+        return component_value

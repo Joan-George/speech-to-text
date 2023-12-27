@@ -40,6 +40,7 @@ const SpeechToText = (props: ComponentProps) => {
   const stopHandle = () => {
     setIsListening(false)
     SpeechRecognition.stopListening()
+    Streamlit.setComponentValue({ transcript, stopped: true })
     resetTranscript()
   }
   const handleReset = () => {
@@ -49,21 +50,22 @@ const SpeechToText = (props: ComponentProps) => {
 
   useEffect(() => {
     Streamlit.setFrameHeight()
-    Streamlit.setComponentValue(transcript)
+    console.log({ transcript })
+    if (transcript !== "") Streamlit.setComponentValue(transcript)
   }, [transcript])
   return (
     <div className="microphone-wrapper">
       <div className="mircophone-container">
         {!isListening ? (
           <div
-            className="microphone-icon-container btn btn-sm btn-outline-success"
+            className="microphone-icon-container btn btn-sm btn-outline-success bg-dark"
             onClick={handleListing}
           >
             Start Recording
           </div>
         ) : (
           <button
-            className="microphone-stop btn btn-sm btn-outline-danger"
+            className="microphone-stop btn btn-sm btn-outline-danger bg-dark"
             onClick={stopHandle}
           >
             Stop Recording
