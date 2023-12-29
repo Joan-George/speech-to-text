@@ -58,14 +58,14 @@ const SpeechToText = (props: ComponentProps) => {
       <div className="mircophone-container">
         {!isListening ? (
           <div
-            className="microphone-icon-container btn btn-sm btn-outline-success bg-dark"
+            className="microphone-icon-container btn btn-sm btn-outline-success"
             onClick={handleListing}
           >
             Start Recording
           </div>
         ) : (
           <button
-            className="microphone-stop btn btn-sm btn-outline-danger bg-dark"
+            className="microphone-stop btn btn-sm btn-outline-danger"
             onClick={stopHandle}
           >
             Stop Recording

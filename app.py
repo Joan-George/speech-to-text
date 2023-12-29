@@ -6,7 +6,7 @@ def initialize_app():
         st.session_state.mycall_output = ''
 
 def mycall():
-    st.session_state.mycall_output = f"mycall__{st.session_state.react_stt_output}"
+    st.session_state.mycall_output = st.session_state.react_stt_output
     # st.experimental_rerun()
 
 def voice_transcriber():
@@ -20,7 +20,7 @@ def voice_transcriber():
         key='transcription',
     )
     st.write(f"{v_custom}{type(v_custom)}")
-    st.write(f"output of callback:{st.session_state.mycall_output}")
+    st.write(f"output of callback: {st.session_state.mycall_output}")
 
 
 

@@ -8,6 +8,8 @@ yarn.lock
 # testing
 /coverage
 
+# Dependency directories
+node_modules/
 
 # misc
 .DS_Store
